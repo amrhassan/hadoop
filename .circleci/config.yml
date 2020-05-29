@@ -4,6 +4,19 @@ jobs:
     docker: 
       - image: circleci/openjdk:8-jdk-stretch
     steps:
-      - run: apt install -yy libprotoc-dev
+      - run:
+          name: Setup libprotoc
+          command: |
+            cd /home/circleci
+            wget https://github.com/google/protobuf/releases/download/v2.5.0/protobuf-2.5.0.tar.bz2
+            tar -xf protobuf-2.5.0.tar.bz2
+            cd protobuf-2.5.0
+            ./configure
+            make
+            make check
+            sudo make install
+            sudo ldconfig
+            protoc --version
+            cd -
       - checkout
       - run: mvn package -Pdist -DskipTests -DskipShade
