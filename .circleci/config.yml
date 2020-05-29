@@ -19,4 +19,4 @@ jobs:
             protoc --version
             cd -
       - checkout
-      - run: mvn package -Pdist -DskipTests -DskipShade
+      - run: mvn package -Pdist -DskipTests -DskipShade -Dmaven.javadoc.skip=true
