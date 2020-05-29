@@ -4,5 +4,6 @@ jobs:
     docker: 
       - image: circleci/openjdk:8-jdk-stretch
     steps:
+      - run: apt install -yy libprotoc-dev
       - checkout
       - run: mvn package -Pdist -DskipTests -DskipShade
